@@ -209,18 +209,63 @@ button {
   text-decoration:black; /* Optional: underline on hover */
 }
 
+/* Container for the SOS button and the form */
+/* .button-container {
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+} */
+
+/* Container for the text box and Reach Out button */
+.text-box-container {
+  display: flex;
+  flex-direction: column;
+  margin-left: 5px;
+}
+
+/* Styling for the text box */
+.reach-out-textbox {
+  padding: 10px;
+  width: 300px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  margin-bottom: 10px;
+}
+
+/* Styling for the Reach Out button */
+.reach-out-button {
+  background-color: #003366;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  margin-right: 10px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.reach-out-button:hover {
+  background-color: #008080;
+  color: black;
+}
+
+/* SOS button styling */
 .sos-button {
-  background-color: #003366; /* Blue background */
-  color: white; /* White text */
-  border: none; /* Remove default border */
-  padding: 10px 20px; /* Add padding for better appearance */
-  font-size: 16px; /* Adjust font size */
-  cursor: pointer; /* Change cursor to pointer */
-  border-radius: 5px; /* Rounded corners */
-  transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition for background and text color */
+  background-color: #003366;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  display: flex;
+  margin-left:160px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-bottom:10px;
+  border-radius: 5px;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .sos-button:hover {
-  background-color: #008080; /* Light blue on hover */
-  color: black; /* Black text on hover */
+  background-color: #008080;
+  color: black;
 }
