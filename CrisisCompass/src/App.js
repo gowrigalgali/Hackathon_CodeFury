@@ -69,7 +69,6 @@ function Home() {
     <div className="App">
       <header>
         <h1>CrisisCompass</h1>
-        <input className="search-bar" type="text" placeholder="Search through the website..." />
       </header>
 
       <NewsSlider />
