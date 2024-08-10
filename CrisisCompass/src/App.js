@@ -1,26 +1,56 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 import './App.css';
-import { useNavigate } from 'react-router-dom';
 import NewsSlider from './newsslider';
 import RegisterLogin from './RegisterLogin';
-import VolunteerHelp from './components/VolunteerHelp'; // Importing the VolunteerHelp component
-import LocationSMS from './sos.js';
+import VolunteerHelp from './components/VolunteerHelp';
+import axios from 'axios';
+
 function Home() {
-  const navigate = useNavigate();
+  const [isSending, setIsSending] = useState(false);
+  const [sosMessage, setSosMessage] = useState('');
+
+  const sendLocationSMS = async () => {
+    try {
+      setIsSending(true);
+      setSosMessage('Sending SOS message...');
+
+      const smsPayload = {
+        from: '447441421037',
+        to: ['919611760575'],
+        body: 'SOS message or location data'
+      };
+
+      const response = await axios.post('http://localhost:5000/api/send-sms', smsPayload);
+
+      // Check if the response status is 200 (OK)
+      if (response.status === 200) {
+        setSosMessage('Failed to send SOS message.');
+      } else {
+        setSosMessage('SOS message sent successfully!');
+      }
+    } catch (error) {
+      console.error('Error sending SMS:', error);
+      setSosMessage('Error sending SOS message.');
+    } finally {
+      setIsSending(false);
+    }
+  };
 
   const handleSOSClick = () => {
-    navigate('/sendsos');
+    if (isSending) return; // Prevent multiple clicks
+    sendLocationSMS();
   };
+
   return (
     <div className="App">
       <header>
         <h1>CrisisCompass</h1>
         <input className="search-bar" type="text" placeholder="Search through the website..." />
       </header>
-      
+
       <NewsSlider />
-      
+
       <div className="card-container">
         <div className="card learn">
           <h2>Learn</h2>
@@ -31,23 +61,27 @@ function Home() {
           <h2>Prepare</h2>
           <p>Prepare yourself for emergencies.</p>
           <ul>
-            <li><a href="#">Earthquake</a></li>
-            <li><a href="#">Hurricane</a></li>
-            <li><a href="#">Floods</a></li>
-            <li><a href="#">Tornado</a></li></ul>
+            <li><button className="link-button">Earthquake</button></li>
+            <li><button className="link-button">Hurricane</button></li>
+            <li><button className="link-button">Floods</button></li>
+            <li><button className="link-button">Tornado</button></li>
+          </ul>
         </div>
         <div className="card act">
           <h2>Act</h2>
           <p>Take action to help those affected by disasters.</p>
           <button 
             onClick={handleSOSClick} 
-            className="sos-button">
+            className="sos-button"
+            disabled={isSending}
+          >
             SOS
           </button>
+          {sosMessage && <p className="sos-message">{sosMessage}</p>}
         </div>
       </div>
 
-      <VolunteerHelp /> {/* Adding the VolunteerHelp section here */}
+      <VolunteerHelp />
 
       <div className="bottom-buttons">
         <Link to="/register" className="link-button">
@@ -64,7 +98,6 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/register" element={<RegisterLogin />} />
-        <Route path="/sendsos" element={<LocationSMS />} /> {/*Add the missing route*/}
       </Routes>
     </Router>
   );
