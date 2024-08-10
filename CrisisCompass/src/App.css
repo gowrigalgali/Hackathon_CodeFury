@@ -139,7 +139,8 @@ button {
 }
 
 .submit-button:hover {
-  background-color: #002244;
+  background-color: #008080; /* Light blue on hover */
+  color: black; /* Black text on hover */
 }
 
 .link-button {
@@ -208,4 +209,18 @@ button {
   text-decoration:black; /* Optional: underline on hover */
 }
 
+.sos-button {
+  background-color: #003366; /* Blue background */
+  color: white; /* White text */
+  border: none; /* Remove default border */
+  padding: 10px 20px; /* Add padding for better appearance */
+  font-size: 16px; /* Adjust font size */
+  cursor: pointer; /* Change cursor to pointer */
+  border-radius: 5px; /* Rounded corners */
+  transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition for background and text color */
+}
 
+.sos-button:hover {
+  background-color: #008080; /* Light blue on hover */
+  color: black; /* Black text on hover */
+}
