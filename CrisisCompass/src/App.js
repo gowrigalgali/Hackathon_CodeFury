@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 import './App.css';
 import NewsSlider from './newsslider';
+import RegisterLogin from './RegisterLogin';
 
 function Home() {
   return (
@@ -68,11 +69,13 @@ function App() {
     <Router>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/register" element={<Register />} />
+        <Route path="/register" element={<RegisterLogin />} />
       </Routes>
     </Router>
   );
 }
 
 export default App;
+
+
 
