@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 import './App.css';
+import NewsSlider from './newsslider';
 
 function Home() {
   return (
@@ -10,18 +11,23 @@ function Home() {
         <input className="search-bar" type="text" placeholder="Search through the website..." />
       </header>
       
-      <div className="slider">
-        <p>Recent Disaster Events: Floods in Country X | Earthquake in Region Y | Wildfires in Area Z</p>
-      </div>
+      <NewsSlider />
       
       <div className="card-container">
         <div className="card learn">
           <h2>Learn</h2>
-          <p>Find educational resources and articles.</p>
+          <p>Enhance your knowledge about calamities and disasters</p>
+          <button type="submit" className="submit-button">Click here to learn with our Chat Bot 🎧</button>
         </div>
         <div className="card prepare">
           <h2>Prepare</h2>
-          <p>Get tips and guides on how to prepare for emergencies.</p>
+          <p>Prepare yourself for emergencies.</p>
+          <ul>
+            <li><a href="#">Earthquake</a></li>
+            <li><a href="#">Hurricane</a></li>
+            <li><a href="#">Floods</a></li>
+            <li><a href="#">Tornado</a></li></ul>
+          
         </div>
         <div className="card act">
           <h2>Act</h2>
@@ -33,7 +39,6 @@ function Home() {
         <Link to="/register" className="link-button">
           <button className="volunteer-button">Join as a Volunteer</button>
         </Link>
-        <button className="chat-button">Chat with our bot 🎧</button>
       </div>
     </div>
   );

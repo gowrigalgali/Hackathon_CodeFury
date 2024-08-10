@@ -149,3 +149,62 @@ button {
 .link-button button {
   background-color: #003366;
 }
+/* Add to App.css */
+
+.slider {
+  background-color: #008080;
+  color: white;
+  padding: 10px;
+  margin-top: 20px;
+  white-space: nowrap;
+  overflow: hidden;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.slider marquee {
+  display: inline-block;
+  animation: scroll 15s linear infinite;
+}
+
+@keyframes scroll {
+  from { transform: translateX(100%); }
+  to { transform: translateX(-100%); }
+}
+/* Add to App.css */
+
+.news-link {
+  color: white;
+  text-decoration: none;
+  margin: 0 15px;
+}
+
+.news-link:hover {
+  text-decoration: underline;
+}
+/* Add to App.css */
+
+.card.prepare {
+  background-color: #e6e6e6; /* Adjust background if needed */
+}
+
+.card.prepare ul {
+  list-style-type: none; /* Remove bullet points */
+  padding: 0; /* Remove default padding */
+  margin: 0; /* Remove default margin */
+}
+
+.card.prepare li {
+  margin-bottom: 10px; /* Space between list items */
+}
+
+.card.prepare a {
+  text-decoration: none; /* Remove underline */
+  color: #008080; /* Blue color */
+  font-weight: bold; /* Bold text */
+  display: block; /* Make links block level for better spacing */
+}
+
+.card.prepare a:hover {
+  text-decoration:black; /* Optional: underline on hover */
+}
+
