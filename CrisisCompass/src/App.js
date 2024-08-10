@@ -1,18 +1,17 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom'; // Add imports for Router, Route, Routes, and Link
+import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 import './App.css';
 import { useNavigate } from 'react-router-dom';
-import NewsSlider from './newsslider'; // Import NewsSlider component
-import RegisterLogin from './RegisterLogin'; // Import RegisterLogin component
-import SendSOS from './sos'; // Import SendSOS component
-
+import NewsSlider from './newsslider';
+import RegisterLogin from './RegisterLogin';
+import VolunteerHelp from './components/VolunteerHelp'; // Importing the VolunteerHelp component
+import LocationSMS from './sos.js';
 function Home() {
   const navigate = useNavigate();
 
   const handleSOSClick = () => {
     navigate('/sendsos');
   };
-
   return (
     <div className="App">
       <header>
@@ -35,8 +34,7 @@ function Home() {
             <li><a href="#">Earthquake</a></li>
             <li><a href="#">Hurricane</a></li>
             <li><a href="#">Floods</a></li>
-            <li><a href="#">Tornado</a></li>
-          </ul>
+            <li><a href="#">Tornado</a></li></ul>
         </div>
         <div className="card act">
           <h2>Act</h2>
@@ -48,6 +46,8 @@ function Home() {
           </button>
         </div>
       </div>
+
+      <VolunteerHelp /> {/* Adding the VolunteerHelp section here */}
 
       <div className="bottom-buttons">
         <Link to="/register" className="link-button">
@@ -64,14 +64,10 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/register" element={<RegisterLogin />} />
-        <Route path="/sendsos" element={<SendSOS />} />
+        <Route path="/sendsos" element={<LocationSMS />} /> {/*Add the missing route*/}
       </Routes>
     </Router>
   );
 }
 
 export default App;
-
-
-
-
