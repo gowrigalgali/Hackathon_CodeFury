@@ -1,9 +1,8 @@
-// server.js
 const express = require('express');
-const cors = require('cors'); // Import cors
+const cors = require('cors');
 const axios = require('axios');
 const app = express();
-const port = 5000; // Choose your port
+const port = 5000;
 
 // Apply CORS middleware
 app.use(cors());
@@ -19,6 +18,7 @@ app.post('/api/send-sms', async (req, res) => {
     });
     res.status(response.status).json(response.data);
   } catch (error) {
+    console.error('Error details:', error.response ? error.response.data : error.message);
     res.status(error.response?.status || 500).json(error.response?.data || { message: 'Error sending SMS' });
   }
 });
