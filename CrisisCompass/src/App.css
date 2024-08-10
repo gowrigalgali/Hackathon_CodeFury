@@ -100,4 +100,52 @@ button {
 .chat-button {
   background-color: #008080;
 }
+.register-page {
+  text-align: center;
+  padding: 20px;
+}
 
+.register-page h1 {
+  color: #003366;
+}
+
+.register-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.register-form label {
+  margin: 10px 0;
+}
+
+.register-form input {
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  margin-top: 5px;
+  width: 300px;
+}
+
+.submit-button {
+  background-color: #003366;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 20px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.submit-button:hover {
+  background-color: #002244;
+}
+
+.link-button {
+  text-decoration: none;
+}
+
+.link-button button {
+  background-color: #003366;
+}

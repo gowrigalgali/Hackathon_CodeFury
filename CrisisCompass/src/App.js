@@ -1,7 +1,8 @@
 import React from 'react';
+import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 import './App.css';
 
-function App() {
+function Home() {
   return (
     <div className="App">
       <header>
@@ -29,11 +30,44 @@ function App() {
       </div>
 
       <div className="bottom-buttons">
-        <button className="volunteer-button">Join as a Volunteer</button>
+        <Link to="/register" className="link-button">
+          <button className="volunteer-button">Join as a Volunteer</button>
+        </Link>
         <button className="chat-button">Chat with our bot 🎧</button>
       </div>
     </div>
   );
 }
 
+function Register() {
+  return (
+    <div className="register-page">
+      <h1>Register or Login</h1>
+      <form className="register-form">
+        <label>
+          Email:
+          <input type="email" placeholder="Your email" />
+        </label>
+        <label>
+          Password:
+          <input type="password" placeholder="Your password" />
+        </label>
+        <button type="submit" className="submit-button">Submit</button>
+      </form>
+    </div>
+  );
+}
+
+function App() {
+  return (
+    <Router>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/register" element={<Register />} />
+      </Routes>
+    </Router>
+  );
+}
+
 export default App;
+
