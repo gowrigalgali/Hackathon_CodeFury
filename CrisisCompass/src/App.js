@@ -1,17 +1,28 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, Link, useNavigate } from 'react-router-dom';
 import './App.css';
-import { useNavigate } from 'react-router-dom';
 import NewsSlider from './newsslider';
 import RegisterLogin from './RegisterLogin';
-import VolunteerHelp from './components/VolunteerHelp'; // Importing the VolunteerHelp component
-import LocationSMS from './sos.js';
+import VolunteerHelp from './components/VolunteerHelp';
+import LocationSMS from './sos';
+import Chatbot from './chatbot'; 
+import EarthquakeDetails from './earthquake'; 
+import HurricaneDetails from './hurricane';
+import FloodDetails from './flood'; 
+import TornadoDetails from './tornado'; 
+
+
 function Home() {
   const navigate = useNavigate();
 
   const handleSOSClick = () => {
     navigate('/sendsos');
   };
+
+  const handleLearnClick = () => {
+    navigate('/chatbot');
+  };
+
   return (
     <div className="App">
       <header>
@@ -25,29 +36,57 @@ function Home() {
         <div className="card learn">
           <h2>Learn</h2>
           <p>Enhance your knowledge about calamities and disasters</p>
-          <button type="submit" className="submit-button">Click here to learn with our Chat Bot 🎧</button>
+          <button 
+            type="button" 
+            className="submit-button"
+            onClick={handleLearnClick}
+          >
+            Click here to learn with our Chat Bot 🎧
+          </button>
         </div>
         <div className="card prepare">
-          <h2>Prepare</h2>
-          <p>Prepare yourself for emergencies.</p>
-          <ul>
-            <li><a href="#">Earthquake</a></li>
-            <li><a href="#">Hurricane</a></li>
-            <li><a href="#">Floods</a></li>
-            <li><a href="#">Tornado</a></li></ul>
+          <div>
+            <h2>Prepare</h2>
+            <p>Prepare yourself for emergencies and various natural disasters.</p>
+            <div className="preparation-list">
+              <ul>
+                <li>
+                  <Link to="/earthquake">
+                    <h3>Earthquake</h3>
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/hurricane">
+                    <h3>Hurricane</h3>
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/flood">
+                    <h3>Floods</h3>
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/tornado">
+                    <h3>Tornado</h3>
+                  </Link>
+                </li>
+              </ul>
+            </div>
+          </div>
         </div>
         <div className="card act">
           <h2>Act</h2>
           <p>Take action to help those affected by disasters.</p>
           <button 
             onClick={handleSOSClick} 
-            className="sos-button">
+            className="sos-button"
+          >
             SOS
           </button>
         </div>
       </div>
 
-      <VolunteerHelp /> {/* Adding the VolunteerHelp section here */}
+      <VolunteerHelp /> 
 
       <div className="bottom-buttons">
         <Link to="/register" className="link-button">
@@ -64,7 +103,12 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/register" element={<RegisterLogin />} />
-        <Route path="/sendsos" element={<LocationSMS />} /> {/*Add the missing route*/}
+        <Route path="/sendsos" element={<LocationSMS />} />
+        <Route path="/chatbot" element={<Chatbot />} />
+        <Route path="/earthquake" element={<EarthquakeDetails />} /> {/* Corrected component usage */}
+        <Route path="/hurricane" element={<HurricaneDetails />} />
+        <Route path="/flood" element={<FloodDetails />} /> 
+        <Route path="/tornado" element={<TornadoDetails />} /> 
       </Routes>
     </Router>
   );
