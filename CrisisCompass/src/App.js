@@ -2,44 +2,67 @@ import React, { useState } from 'react';
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 import './App.css';
 import NewsSlider from './newsslider';
-import RegisterLogin from './RegisterLogin';
 import VolunteerHelp from './components/VolunteerHelp';
 import axios from 'axios';
 
 function Home() {
   const [isSending, setIsSending] = useState(false);
   const [sosMessage, setSosMessage] = useState('');
+  const [reachOutMessage, setReachOutMessage] = useState('');
+  const [reachOutStatus, setReachOutStatus] = useState('');
 
   const sendLocationSMS = async () => {
     try {
       setIsSending(true);
       setSosMessage('Sending SOS message...');
-
-      const smsPayload = {
-        from: '447441421037',
-        to: ['919611760575'],
-        body: 'SOS message or location data'
-      };
-
-      const response = await axios.post('http://localhost:5000/api/send-sms', smsPayload);
-
-      // Check if the response status is 200 (OK)
+      const response = await axios.post('http://localhost:5000/api/send-sms', {
+        from: '447441421037',  // Your sender number
+        to: ['919611760575'],  // Receiver number
+        body: 'SOS: Send help to my location!',
+      });
       if (response.status === 200) {
         setSosMessage('Failed to send SOS message.');
       } else {
         setSosMessage('SOS message sent successfully!');
       }
     } catch (error) {
-      console.error('Error sending SMS:', error);
+      console.error('Error sending SMS:', error.response?.data || error.message);
       setSosMessage('Error sending SOS message.');
     } finally {
       setIsSending(false);
     }
   };
 
+  const sendReachOutMessage = async () => {
+    try {
+      setReachOutStatus('Sending your message...');
+      const response = await axios.post('http://localhost:5000/api/send-sms', {
+        from: '447441421037',  // Your sender number
+        to: ['919611760575'],  // Receiver number
+        body: reachOutMessage,
+      });
+      if (response.status === 200) {
+        setReachOutStatus('Failed to send your message.');
+      } else {
+        setReachOutStatus('Message sent successfully!');
+      }
+    } catch (error) {
+      console.error('Error sending message:', error.response?.data || error.message);
+      setReachOutStatus('Error sending your message.');
+    }
+  };
+
   const handleSOSClick = () => {
     if (isSending) return; // Prevent multiple clicks
     sendLocationSMS();
+  };
+
+  const handleReachOutClick = () => {
+    if (reachOutMessage.trim() === '') {
+      setReachOutStatus('Please enter a message.');
+      return;
+    }
+    sendReachOutMessage();
   };
 
   return (
@@ -78,6 +101,21 @@ function Home() {
             SOS
           </button>
           {sosMessage && <p className="sos-message">{sosMessage}</p>}
+
+          {/* Reach Out Section */}
+          <textarea
+            className="reach-out-textbox"
+            placeholder="Type your message..."
+            value={reachOutMessage}
+            onChange={(e) => setReachOutMessage(e.target.value)}
+          />
+          <button
+            onClick={handleReachOutClick}
+            className="reach-out-button"
+          >
+            Reach Out
+          </button>
+          {reachOutStatus && <p className="reach-out-status">{reachOutStatus}</p>}
         </div>
       </div>
 
@@ -97,7 +135,6 @@ function App() {
     <Router>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/register" element={<RegisterLogin />} />
       </Routes>
     </Router>
   );
