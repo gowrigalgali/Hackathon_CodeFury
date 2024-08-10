@@ -2,19 +2,18 @@ import React, { useEffect } from 'react';
 import axios from 'axios';
 
 const LocationSMS = () => {
-  // Define your Google API key and Sinch API details
-  const googleApiKey = 'AIzaSyD09_LOGDPCzsLtQPuFblnFxFVTaRAoXEY'; // Replace with your Google API key
+  const googleApiKey = 'AIzaSyD09_LOGDPCzsLtQPuFblnFxFVTaRAoXEY';
   const sinchUrl = 'https://sms.api.sinch.com/xms/v1/9f1e4cf8132f41a691f94278f276ffc7/batches';
-  const sinchAccessToken = '1b23114d88544c89b03bdec6241c6342'; // Replace with your Sinch API access token
+  const sinchAccessToken = '1b23114d88544c89b03bdec6241c6342';
 
-  // Define Sinch API headers
   const axiosInstance = axios.create({
-    baseURL: sinchUrl, // Set this to the Sinch API base URL
+    baseURL: sinchUrl,
     headers: {
       'Authorization': `Bearer ${sinchAccessToken}`,
       'Content-Type': 'application/json',
     },
   });
+
   const smsPayload = {
     from: '447441421037',
     to: ['919611760575'],
@@ -37,9 +36,8 @@ const LocationSMS = () => {
     try {
       const locationMessage = await getCurrentLocation();
       smsPayload.body = locationMessage;
-  
-      // Use your server as a proxy
-      const response = await axios.post('http://localhost:5000/api/send-sms', smsPayload);
+
+      const response = await axios.post('/api/send-sms', smsPayload);
       console.log(`SMS sent successfully. Status Code: ${response.status}`);
       console.log(`Response JSON: ${JSON.stringify(response.data)}`);
     } catch (error) {
@@ -49,7 +47,7 @@ const LocationSMS = () => {
 
   useEffect(() => {
     console.log('LocationSMS component mounted');
-    sendLocationSMS();  // Re-enable this
+    sendLocationSMS();
   }, []);
 
   return (
@@ -60,5 +58,3 @@ const LocationSMS = () => {
 };
 
 export default LocationSMS;
-
-  
