@@ -92,7 +92,7 @@ function Home() {
         </div>
         <div className="card act">
           <h2>Act</h2>
-          <p>Take action to help those affected by disasters.</p>
+          <p>In moments of crisis, the SOS button is there to provide immediate assistance and alert those who can help. For more personal communication or inquiries, the Reach Out button allows you to send a custom message, offering a way to connect without urgency.</p>
           <button 
             onClick={handleSOSClick} 
             className="sos-button"
