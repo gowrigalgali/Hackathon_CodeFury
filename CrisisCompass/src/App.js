@@ -1,10 +1,18 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom'; // Add imports for Router, Route, Routes, and Link
 import './App.css';
-import NewsSlider from './newsslider';
-import RegisterLogin from './RegisterLogin';
+import { useNavigate } from 'react-router-dom';
+import NewsSlider from './newsslider'; // Import NewsSlider component
+import RegisterLogin from './RegisterLogin'; // Import RegisterLogin component
+import SendSOS from './sos'; // Import SendSOS component
 
 function Home() {
+  const navigate = useNavigate();
+
+  const handleSOSClick = () => {
+    navigate('/sendsos');
+  };
+
   return (
     <div className="App">
       <header>
@@ -27,12 +35,17 @@ function Home() {
             <li><a href="#">Earthquake</a></li>
             <li><a href="#">Hurricane</a></li>
             <li><a href="#">Floods</a></li>
-            <li><a href="#">Tornado</a></li></ul>
-          
+            <li><a href="#">Tornado</a></li>
+          </ul>
         </div>
         <div className="card act">
           <h2>Act</h2>
           <p>Take action to help those affected by disasters.</p>
+          <button 
+            onClick={handleSOSClick} 
+            className="sos-button">
+            SOS
+          </button>
         </div>
       </div>
 
@@ -45,37 +58,20 @@ function Home() {
   );
 }
 
-function Register() {
-  return (
-    <div className="register-page">
-      <h1>Register or Login</h1>
-      <form className="register-form">
-        <label>
-          Email:
-          <input type="email" placeholder="Your email" />
-        </label>
-        <label>
-          Password:
-          <input type="password" placeholder="Your password" />
-        </label>
-        <button type="submit" className="submit-button">Submit</button>
-      </form>
-    </div>
-  );
-}
-
 function App() {
   return (
     <Router>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/register" element={<RegisterLogin />} />
+        <Route path="/sendsos" element={<SendSOS />} />
       </Routes>
     </Router>
   );
 }
 
 export default App;
+
 
 
 
