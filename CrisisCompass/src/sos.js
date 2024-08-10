@@ -37,9 +37,9 @@ const LocationSMS = () => {
     try {
       const locationMessage = await getCurrentLocation();
       smsPayload.body = locationMessage;
-
-      // Use axiosInstance for the POST request to Sinch API
-      const response = await axiosInstance.post('', smsPayload);
+  
+      // Use your server as a proxy
+      const response = await axios.post('http://localhost:5000/api/send-sms', smsPayload);
       console.log(`SMS sent successfully. Status Code: ${response.status}`);
       console.log(`Response JSON: ${JSON.stringify(response.data)}`);
     } catch (error) {
@@ -48,7 +48,8 @@ const LocationSMS = () => {
   };
 
   useEffect(() => {
-    sendLocationSMS();
+    console.log('LocationSMS component mounted');
+    sendLocationSMS();  // Re-enable this
   }, []);
 
   return (
@@ -61,4 +62,3 @@ const LocationSMS = () => {
 export default LocationSMS;
 
   
-
