@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import './App.css';
 import tornadoImg from './tornadoImg.jpeg';
 
 const TornadoDetails = () => {
@@ -11,22 +12,20 @@ const TornadoDetails = () => {
 
   useEffect(() => {
     // You can update calamity if needed based on your app logic
-    setCalamity('Tornado');
   }, []);
 
+  const tipContent = tips[calamity] ? tips[calamity].split('\n').map((tip, index) => (
+    <p key={index}>{tip}</p>
+  )) : null;
+
   return (
-    <div>
-      <h2>Tornado</h2>
-      <div id="preparationInfo">
-        <div>
-          <img src={tornadoImg} alt="Tornado" />
-          <p>Learn how to protect yourself and your family during a tornado, including safety tips and emergency preparedness plans.</p>
-          {/* Check if tips[calamity] exists before calling replace */}
-          <div 
-            dangerouslySetInnerHTML={{ 
-              __html: (tips[calamity] || '').replace(/\n/g, '<br/>') 
-            }} 
-          />
+    <div className="weather-container">
+      <div className="weather-overlay"></div> {/* Overlay to darken the image */}
+      <div className="weather-content">
+        <h2 className="weather-title">Tornado</h2>
+        <p>Learn how to protect yourself and your family during a tornado, including safety tips and emergency preparedness plans.</p>
+        <div className="weather-tips">
+          {tipContent}
         </div>
       </div>
     </div>
@@ -34,5 +33,11 @@ const TornadoDetails = () => {
 };
 
 export default TornadoDetails;
+
+
+
+
+
+  
 
 

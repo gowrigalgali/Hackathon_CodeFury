@@ -1,5 +1,6 @@
-import React from 'react';
-import { BrowserRouter as Router, Route, Routes, Link, useNavigate } from 'react-router-dom';
+import React, { useState } from 'react'; // Import useState
+import axios from 'axios'; // Import axios
+import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 import './App.css';
 import NewsSlider from './newsslider';
 import RegisterLogin from './RegisterLogin';
@@ -10,7 +11,6 @@ import EarthquakeDetails from './earthquake';
 import HurricaneDetails from './hurricane';
 import FloodDetails from './flood'; 
 import TornadoDetails from './tornado'; 
-
 
 function Home() {
   const [isSending, setIsSending] = useState(false);
@@ -28,9 +28,9 @@ function Home() {
         body: 'SOS: Send help to my location!',
       });
       if (response.status === 200) {
-        setSosMessage('Failed to send SOS message.');
-      } else {
         setSosMessage('SOS message sent successfully!');
+      } else {
+        setSosMessage('Failed to send SOS message.');
       }
     } catch (error) {
       console.error('Error sending SMS:', error.response?.data || error.message);
@@ -49,9 +49,9 @@ function Home() {
         body: reachOutMessage,
       });
       if (response.status === 200) {
-        setReachOutStatus('Failed to send your message.');
-      } else {
         setReachOutStatus('Message sent successfully!');
+      } else {
+        setReachOutStatus('Failed to send your message.');
       }
     } catch (error) {
       console.error('Error sending message:', error.response?.data || error.message);
@@ -70,6 +70,11 @@ function Home() {
       return;
     }
     sendReachOutMessage();
+  };
+
+  // Define handleLearnClick
+  const handleLearnClick = () => {
+    // Define what should happen when the Learn button is clicked
   };
 
   return (
@@ -91,6 +96,7 @@ function Home() {
           >
             Click here to learn with our Chat Bot 🎧
           </button>
+          <p>Ask innovative questions and get them answered by a Chatbot, not a texting person the chat bot also provides you with videos content.</p>
         </div>
         <div className="card prepare">
           <div>
@@ -170,13 +176,14 @@ function App() {
         <Route path="/register" element={<RegisterLogin />} />
         <Route path="/sendsos" element={<LocationSMS />} />
         <Route path="/chatbot" element={<Chatbot />} />
-        <Route path="/earthquake" element={<EarthquakeDetails />} /> {/* Corrected component usage */}
+        <Route path="/earthquake" element={<EarthquakeDetails />} />
         <Route path="/hurricane" element={<HurricaneDetails />} />
-        <Route path="/flood" element={<FloodDetails />} /> 
-        <Route path="/tornado" element={<TornadoDetails />} /> 
+        <Route path="/flood" element={<FloodDetails />} />
+        <Route path="/tornado" element={<TornadoDetails />} />
       </Routes>
     </Router>
   );
 }
 
 export default App;
+
